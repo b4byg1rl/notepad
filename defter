@@ -1,0 +1,73 @@
+namespace NotDefteri
+{
+    public partial class defter : Form
+    {
+
+            public defter()
+            {
+                InitializeComponent();
+            }
+
+            public int id;
+            public defter(int _id)
+            {
+                id = _id;
+
+            }
+            private void button1_Click(object sender, EventArgs e)
+            {
+            //SORUN VAR HOFF
+            kullanici kullanici = new kullanici(kullanici.getkullaniciadi());
+            string kullaniciadi_ = kullanici.getkullaniciadi();
+            
+                
+                
+                string not =kullaniciadi_+".txt";
+                string dosyayolu = @"c:\notlar";
+                string hedefyol = System.IO.Path.Combine(dosyayolu, not);
+                string metin = richTextBox1.Text;
+                // if (System.IO.File.Exists(hedefyol))
+                //{
+                System.IO.File.WriteAllText(@"c:\notlar\"+not, metin);
+
+                // }
+                // else
+                // {
+                // System.IO.File.Create(hedefyol);
+                // using (System.IO.StreamWriter hedef1 = new System.IO.StreamWriter(@"c:\notlar\not.txt", true))
+                // { 
+
+                // hedef1.WriteLine(metin);
+                // }
+
+                // }
+
+                MessageBox.Show("Not kaydedildi");
+                Form1 form = new Form1();
+                form.Show();
+                this.Hide();
+
+            }
+
+            private void defter_Load(object sender, EventArgs e)
+            {
+
+
+            }
+
+            private void button2_Click(object sender, EventArgs e)
+            {
+
+                string not = "not.txt";
+                string dosyayolu = @"c:\notlar";
+                string hedefyol = System.IO.Path.Combine(dosyayolu, not);
+
+                if (System.IO.File.Exists(hedefyol))
+                {
+                    string dosya = (@"c:\notlar\not.txt");
+                    string metin = System.IO.File.ReadAllText(dosya, Encoding.GetEncoding("windows-1254"));
+                    richTextBox1.Text = metin;
+                }
+            }
+        }
+}

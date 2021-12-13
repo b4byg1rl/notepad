@@ -1,0 +1,53 @@
+namespace NotDefteri
+{
+    public class kullanici
+    {
+        public int id { get; set; }
+        public string kullaniciadi { get; set; }
+        public string sifre { get; set; }
+
+        public kullanici(string kullaniciadi, string sifre, int id)
+        {
+            this.kullaniciadi = kullaniciadi;
+            this.sifre = sifre;
+            this.id = id;
+        }
+         
+        public void setkullaniciadi(string kullaniciadi)
+        {
+            this.kullaniciadi = kullaniciadi;
+        }
+       
+        public string getkullaniciadi()
+        {
+            return kullaniciadi;
+        }
+       
+
+        public void setsifre(string sifre)
+        {
+            this.sifre = sifre;
+        }
+        
+        
+        public string getsifre()
+        {
+            return sifre;
+        }
+        
+        public void setid(int id)
+        {
+            this.id = id;
+        }
+
+        public int getid()
+        {
+            return this.id;
+        }
+        public static implicit operator List<object>(kullanici v)
+        {
+            throw new NotImplementedException();
+        }
+        
+    }
+}

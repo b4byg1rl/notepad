@@ -1,0 +1,201 @@
+namespace NotDefteri
+{
+    public partial class Form1 : Form
+    {
+        
+        public class form2
+        {
+            public string ad;
+        }
+        public Form1()
+        {
+            InitializeComponent();
+            
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+                      
+            
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void butonkaydol_Click(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+
+        
+
+
+        public void butonkaydol_Click_1(object sender, EventArgs e)
+        {
+            
+            string kullaniciadi = textBox1.Text;
+            string sifre = textBox2.Text;
+            int id = 0;
+            string[,] giris = new string[,] { { kullaniciadi, sifre} };
+            bool kontrol = true;
+            bool idkontrol = true;
+            string dosyayolu = @"C:\kullanicilar\kullanicilar.txt"; //dosya okuma
+
+            string[] satirlar = System.IO.File.ReadAllLines(dosyayolu);   //
+
+            for (int i = 0; i < satirlar.Length; i++)
+
+            {
+                if (satirlar[i]==giris[0, 0])
+                {
+                    kontrol = false;
+                   
+                }   
+            }
+
+            if (kontrol==false)
+            {
+               MessageBox.Show("Bu kullanıcı adı kullanılmaktadır, lütfen farklı bir kullanıcı adı seçiniz");
+            }
+
+            else if (kontrol == true)
+            {   
+
+                Random rastgele = new Random();
+                int sayi = rastgele.Next();
+                for (int i = 0; i < satirlar.Length; i++)
+                {
+                    if (satirlar[i].Contains(Convert.ToString(sayi)))
+                    {
+                        idkontrol = false;
+                    }
+                    else
+                    {
+                        id = sayi;
+                        
+                    }
+
+                }
+
+
+                if (idkontrol == true && id != 0)
+                {
+
+                    string kullanici = giris[0, 0] + " " + giris[0, 1] + " " + id;
+
+                    //string bilgi = kullanici[0] +" "+ kullanici[1];
+                    using (System.IO.StreamWriter dosya = new System.IO.StreamWriter(@"C:\kullanicilar\kullanicilar.txt", true))
+                        dosya.WriteLine(kullanici);
+                    //using (System.IO.StreamWriter dosya = new System.IO.StreamWriter(@"C:\kullanicilar\kullanicilar.txt", true))
+                    //  dosya.WriteLine(kullanici[1]);
+
+                    kullanici user = new kullanici(giris[0, 0], giris[0, 1], id); //BURDA KALDIK
+                    user.setid(id);
+
+                    string defteryol = kullaniciadi + ".txt";  //defteri kullanıcılarla eşleyip hepsine defter vericem
+                    string dosyayol = @"c:\notlar";
+                    string hedefyol = System.IO.Path.Combine(dosyayol, defteryol);
+                    defter defter = new defter();
+                    
+                        System.IO.File.Create(hedefyol);
+                        defter.Show();
+                        this.Hide();
+                
+                }
+            }
+        }
+
+        private void butongiris_Click(object sender, EventArgs e)
+        {
+            string kullaniciadi, sifre;
+            kullaniciadi = textBox1.Text;
+            sifre = textBox2.Text;
+           
+            bool kontrol = false;
+            string[,] giris = new string[,] { { kullaniciadi, sifre} };
+
+            string dosyayolu = @"C:\kullanicilar\kullanicilar.txt"; //dosya okuma
+
+
+            string defteryol = kullaniciadi + ".txt";  
+            string dosyayol = @"c:\notlar";
+            string hedefyol = System.IO.Path.Combine(dosyayol, defteryol);
+
+            string [] satirlar =System.IO.File.ReadAllLines(dosyayolu); //satırlardaki boşluğa göre kullanıcı adı şifreyi ayırıp değişkene atıycam, idyi de ayırıp atamam gerekiyo
+            
+            for (int i=0;i<satirlar.Length;i++)
+            {
+        
+                    if (satirlar[i].Contains(giris[0,0]) && satirlar[i].Contains(giris[0,1])) 
+            
+                    {
+                        kontrol = true;
+                        System.IO.File.OpenWrite(hedefyol); 
+                        defter defter = new defter();
+                        defter.Show();
+                        this.Hide();
+                    }
+            }
+
+            if (kontrol == false)
+            {
+                MessageBox.Show("Kullanıcı adınız yanlış veya hesabınız yok, lütfen tekrar deneyin");
+            }
+
+            /*
+            for (int i=0;i<satirlar.Length;i++)
+            {
+                ad = satirlar[i].Split(' ');
+            }
+            
+            */
+
+            /*
+            string[] girisci;
+            
+            for (int i = 0; i <= satirlar.Length; i++)
+            {
+                for(int j=0;j<satirlar[i].Length;j++)
+                {
+                    girisci =satirlar[i].Split(' ');
+                    dizi.Add(girisci[0]);
+                    dizi.Add(girisci[1]);
+                }
+                
+            }
+            if (dizi[0] == kullaniciadi && dizi[1] == sifre)
+            {
+                defter defter = new defter();
+                defter.Show();
+                this.Hide();
+            }
+          */
+            //string metin = System.IO.File.ReadAllText(dosyayolu);
+
+            //if (metin.Contains(giris[0]) && metin.Contains(giris[1]))  
+
+
+
+
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
